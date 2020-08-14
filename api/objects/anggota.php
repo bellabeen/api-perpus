@@ -136,53 +136,53 @@ class Anggota{
     }
 
 
-    // update the product
-    function updatePeminjaman(){    
+       // update the product
+       function updateAnggota(){    
         // update query
         $query = "UPDATE
                     " . $this->table_name . "
                 SET
-                    id_buku = :id_buku,
-                    id_peminjam = :id_peminjam,
-                    tanggal_pesan = :tanggal_pesan,
-                    jam_pesan = :jam_pesan,
-                    expired_date = :expired_date,
-                    tanggal_pinjam = :tanggal_pinjam,
-                    batas_kembali = :batas_kembali,
-                    tanggal_pengembalian = :tanggal_pengembalian,
+                    indeks = :indeks,
+                    hp = :hp,
+                    email = :email,
+                    tanggal_daftar = :tanggal_daftar,
+                    kata_sandi = :kata_sandi,
+                    foto = :foto,
                     status = :status,
-                    PP = :PP
+                    id_sesi = :id_sesi,
+                    lastlogin = :lastlogin,
+                    host = :host
                 WHERE
-                    id_peminjaman = :id_peminjaman";
+                    indeks = :indeks";
     
         // prepare query statement
         $stmt = $this->conn->prepare($query);
     
         // sanitize
-        $this->id_buku=htmlspecialchars(strip_tags($this->id_buku));
-        $this->id_peminjam=htmlspecialchars(strip_tags($this->id_peminjam));
-        $this->tanggal_pesan=htmlspecialchars(strip_tags($this->tanggal_pesan));
-        $this->jam_pesan=htmlspecialchars(strip_tags($this->jam_pesan));
-        $this->expired_date=htmlspecialchars(strip_tags($this->expired_date));
-        $this->tanggal_pinjam=htmlspecialchars(strip_tags($this->tanggal_pinjam));
-        $this->batas_kembali=htmlspecialchars(strip_tags($this->batas_kembali));
-        $this->tanggal_pengembalian=htmlspecialchars(strip_tags($this->tanggal_pengembalian));
+        $this->indeks=htmlspecialchars(strip_tags($this->indeks));
+        $this->hp=htmlspecialchars(strip_tags($this->hp));
+        $this->email=htmlspecialchars(strip_tags($this->email));
+        $this->tanggal_daftar=htmlspecialchars(strip_tags($this->tanggal_daftar));
+        $this->kata_sandi=htmlspecialchars(strip_tags($this->kata_sandi));
+        $this->foto=htmlspecialchars(strip_tags($this->foto));
         $this->status=htmlspecialchars(strip_tags($this->status));
-        $this->PP=htmlspecialchars(strip_tags($this->PP));
-        $this->id_peminjaman=htmlspecialchars(strip_tags($this->id_peminjaman));
+        $this->id_sesi=htmlspecialchars(strip_tags($this->id_sesi));
+        $this->lastlogin=htmlspecialchars(strip_tags($this->lastlogin));
+        $this->host=htmlspecialchars(strip_tags($this->host));
+
     
         // bind new values
-        $stmt->bindParam(':id_buku', $this->id_buku);
-        $stmt->bindParam(':id_peminjam', $this->id_peminjam);
-        $stmt->bindParam(':tanggal_pesan', $this->tanggal_pesan);
-        $stmt->bindParam(':jam_pesan', $this->jam_pesan);
-        $stmt->bindParam(':expired_date', $this->expired_date);
-        $stmt->bindParam(':tanggal_pinjam', $this->tanggal_pinjam);
-        $stmt->bindParam(':batas_kembali', $this->batas_kembali);
-        $stmt->bindParam(':tanggal_pengembalian', $this->tanggal_pengembalian);
+        $stmt->bindParam(':indeks', $this->indeks);
+        $stmt->bindParam(':hp', $this->hp);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':tanggal_daftar', $this->tanggal_daftar);
+        $stmt->bindParam(':kata_sandi', $this->kata_sandi);
+        $stmt->bindParam(':foto', $this->foto);
         $stmt->bindParam(':status', $this->status);
-        $stmt->bindParam(':PP', $this->PP);
-        $stmt->bindParam(':id_peminjaman', $this->id_peminjaman);
+        $stmt->bindParam(':id_sesi', $this->id_sesi);
+        $stmt->bindParam(':lastlogin', $this->lastlogin);
+        $stmt->bindParam(':host', $this->host);
+
     
         // execute the query
         if($stmt->execute()){
@@ -192,21 +192,20 @@ class Anggota{
         return false;
     }
 
-
     // delete the product
-    function deletePeminjaman(){
+    function deleteAnggota(){
     
         // delete query
-        $query = "DELETE FROM " . $this->table_name . " WHERE id_peminjaman = ?";
+        $query = "DELETE FROM " . $this->table_name . " WHERE indeks = ?";
     
         // prepare query
         $stmt = $this->conn->prepare($query);
     
         // sanitize
-        $this->id_peminjaman=htmlspecialchars(strip_tags($this->id_peminjaman));
+        $this->indeks=htmlspecialchars(strip_tags($this->indeks));
     
         // bind id of record to delete
-        $stmt->bindParam(1, $this->id_peminjaman);
+        $stmt->bindParam(1, $this->indeks);
     
         // execute query
         if($stmt->execute()){
