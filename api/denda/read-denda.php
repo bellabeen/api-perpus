@@ -6,26 +6,26 @@ header("Content-Type: application/json; charset=UTF-8");
 // database connection will be here
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/bahasa.php';
+include_once '../objects/denda.php';
   
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
   
 // initialize object
-$bahasa = new Bahasa($db);
+$denda = new Denda($db);
   
 // read products will be 
 // query products
-$stmt = $bahasa->readBahasa();
+$stmt = $denda->readDenda();
 $num = $stmt->rowCount();
   
 // check if more than 0 record found
 if($num>0){
   
     // products array
-    $bahasas_arr=array();
-    $bahasas_arr["records"]=array();
+    $dendas_arr=array();
+    $dendas_arr["records"]=array();
   
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -36,21 +36,22 @@ if($num>0){
         // just $name only
         extract($row);
   
-        $bahasa_item=array(
-            "id_bahasa" => $id_bahasa,
-            "bahasa" => $bahasa,
-            
-
+        $denda_item=array(
+            "id_denda" => $id_denda,
+            "id_peminjaman" => $id_peminjaman,
+            "jml_hari" => $jml_hari,
+            "total_denda" => $total_denda,
+            "status" => $status,
         );
   
-        array_push($bahasas_arr["records"], $bahasa_item);
+        array_push($dendas_arr["records"], $denda_item);
     }
   
     // set response code - 200 OK
     http_response_code(200);
   
     // show products data in json format
-    echo json_encode($bahasas_arr);
+    echo json_encode($dendas_arr);
 }
 
 else{
@@ -60,7 +61,7 @@ else{
   
     // tell the user no products found
     echo json_encode(
-        array("message" => "No Bahasa found.")
+        array("message" => "No Denda found.")
     );
 }
   
@@ -71,6 +72,6 @@ else{
   
 //     // tell the user no products found
 //     echo json_encode(
-//         array("message" => "No Peminjaman found.")
+//         array("message" => "No Denda found.")
 //     );
 // }
