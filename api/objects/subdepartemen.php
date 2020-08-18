@@ -1,14 +1,14 @@
 <?php
-class Bagian{
+class Subdepartemen{
   
     // database connection and table name
     private $conn;
-    private $table_name = "bagian";
+    private $table_name = "subdepartemen";
   
     // object properties
-    public $id_bag;
+    public $id_dep;
     public $id_subdep;
-    public $nama_bag;
+    public $nama_subdep;
 
   
     // constructor with $db as database connection
@@ -17,7 +17,7 @@ class Bagian{
     }
 
     // read products
-    function readBagian(){
+    function readSubdepartemen(){
     
         // select all query
         $query = "SELECT
@@ -25,7 +25,7 @@ class Bagian{
                 FROM
                     " . $this->table_name . " 
                 ORDER BY
-                    id_bag ASC";
+                    id_subdep ASC";
     
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -37,27 +37,27 @@ class Bagian{
     }
 
     // create product
-    function createBagian(){
+    function createSubdepartemen(){
     
         // query to insert record
         $query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    id_bag=:id_bag, id_subdep=:id_subdep, nama_bagian=:nama_bagian";
+                    id_subdep=:id_subdep, id_dep=:id_dep, nama_subdep=:nama_subdep";
     
         // prepare query
         $stmt = $this->conn->prepare($query);
     
         // sanitize
-        $this->id_bag=htmlspecialchars(strip_tags($this->id_bag));
         $this->id_subdep=htmlspecialchars(strip_tags($this->id_subdep));
-        $this->nama_bag=htmlspecialchars(strip_tags($this->nama_bag));
+        $this->id_dep=htmlspecialchars(strip_tags($this->id_dep));
+        $this->nama_subdep=htmlspecialchars(strip_tags($this->nama_subdep));
 
     
         // bind values
-        $stmt->bindParam(":id_bag", $this->id_bag);
         $stmt->bindParam(":id_subdep", $this->id_subdep);
-        $stmt->bindParam(":nama_bag", $this->nama_bag);
+        $stmt->bindParam(":id_dep", $this->id_dep);
+        $stmt->bindParam(":nama_subdep", $this->nama_subdep);
 
 
     
@@ -72,7 +72,7 @@ class Bagian{
 
 
     // used when filling up the update product form
-    function readBagianPilihan(){
+    function readSubdepartemenPilihan(){
 
         // query to read single record
         $query = "SELECT
@@ -80,14 +80,14 @@ class Bagian{
                 FROM
                     " . $this->table_name . "
                 WHERE
-                    id_bag  = ?
+                    id_subdep  = ?
                 ";
     
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
     
         // bind id of product to be updated
-        $stmt->bindParam(1, $this->id_bag);
+        $stmt->bindParam(1, $this->id_subdep);
     
         // execute query
         $stmt->execute();
@@ -97,15 +97,15 @@ class Bagian{
 
     
         // set values to object properties
-        $this->id_bag = $row['id_bag'];
-        $this->id_subdep = $row['id_subdep'];
-        $this->nama_bag = $row['nama_bag'];
+        $this->id_subdep = $row['id_bag'];
+        $this->id_dep = $row['id_subdep'];
+        $this->nama_subdep = $row['nama_bag'];
  
     }
 
 
     // update the product
-    function updateBagian(){    
+    function updateSubdepartemen(){    
         // update query
         $query = "UPDATE
                     " . $this->table_name . "
@@ -119,14 +119,12 @@ class Bagian{
         $stmt = $this->conn->prepare($query);
     
         // sanitize
-        $this->id_bag=htmlspecialchars(strip_tags($this->id_bag));
         $this->id_subdep=htmlspecialchars(strip_tags($this->id_subdep));
         $this->nama_bag=htmlspecialchars(strip_tags($this->nama_bag));
 
         
     
         // bind new values
-        $stmt->bindParam(':id_bag', $this->id_bag);
         $stmt->bindParam(':id_subdep', $this->id_subdep);
         $stmt->bindParam(':nama_bag', $this->nama_bag);
   
@@ -140,7 +138,7 @@ class Bagian{
 
 
     // delete the product
-    function deleteBagian(){
+    function deleteSubdepartemen(){
     
         // delete query
         $query = "DELETE FROM " . $this->table_name . " WHERE id_bag = ?";
