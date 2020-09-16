@@ -214,6 +214,37 @@ class Anggota{
     
         return false;
     }
+
+    function loginAnggota($indeks, $kata_sandi){
+    // query to read single record
+    $query = "SELECT * FROM " . $this->table_name;
+    $query .=" WHERE indeks='".$indeks."' AND kata_sandi='".$kata_sandi."'";
+
+    // prepare query statement
+    $stmt = $this->conn->prepare( $query );
+
+    // bind id of product to be updated
+    $stmt->bindParam(1, $this->indeks);
+
+    // execute query
+    $stmt->execute();
+
+    // get retrieved row
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    // set values to object properties
+    $this->indeks = $row['indeks'];
+    $this->hp = $row['hp'];
+    $this->email = $row['email'];
+    $this->tanggal_daftar = $row['tanggal_daftar'];
+    $this->kata_sandi = $row['kata_sandi'];
+    $this->foto = $row['foto'];
+    $this->status = $row['status'];
+    $this->id_sesi = $row['id_sesi'];
+    $this->lastlogin = $row['lastlogin'];
+    $this->host = $row['host'];
+}
     
 }
 ?>
