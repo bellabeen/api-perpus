@@ -31,7 +31,11 @@ if($stmt->rowCount() > 0) {
         "status" => true,
         "message" => "Successfully Login!",
         "username" => $row['username'],
-        "nama" => $row['nama']
+        "nama" => $row['nama'],
+        "email" => $row['email'],
+        'hp' => $row['hp'],
+        'foto' => $row['foto'],
+        'id_sesi' => $row['id_sesi']
     );
 } else {
     $login_arr = array (

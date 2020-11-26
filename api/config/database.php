@@ -2,16 +2,12 @@
 
 class Database{
     
-//  private $host = "fdb28.awardspace.net";
-//  private $db_name = "3552748_ggp";
-//  private $username = "3552748_ggp";
-//  private $password = "kepoajalu1851";
-//  public $conn;
-private $host = "localhost";
-private $db_name = "ggp";
-private $username = "bellabeen";
-private $password = "kepoajalu";
-public $conn;
+ private $host = "fdb28.awardspace.net";
+ private $db_name = "3552748_ggp";
+ private $username = "3552748_ggp";
+ private $password = "kepoajalu1851";
+ public $conn;
+ 
 	public function getConnection(){
  
         $this->conn = null;
